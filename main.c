@@ -160,11 +160,36 @@ void affichage(){
         }
 
 }
-char nom_departemant[30];
-int moyen_generale_depar=0;
-int x=0;
 void moyen_generale(){
+   char T[20][50];
+   int countDep;
+  for (int i = 0; i < nbr_etudiants; i++){
+    int alreadyPrinted = 0;
+    for (int j = 0; j < i; j++){
+      if (strcmp(etudiants[i].departement, etudiants[j].departement) == 0){
+        alreadyPrinted = 1;
+        break;
+      }
+    }
+    if (!alreadyPrinted){
+      printf("%s\n", etudiants[i].departement);
+      strcpy(T[countDep], etudiants[i].departement);
+      countDep++;
+    }
+  }
 
+  for (int i = 0; i < countDep; i++){
+    float somme = 0;
+    int lengthDep = 0;
+
+    for (int j = 0; j < nbr_etudiants; j++){
+      if (strcmp(T[i], etudiants[j].departement) == 0){
+        somme += etudiants[j].Note_generale;
+        lengthDep++;
+      }
+    }
+        printf("Departement %d %s %.2f \n: ", i + 1, etudiants[i].departement, somme / lengthDep);
+    }
 }
 void Statistiques(){
     int tmp,i,j;
